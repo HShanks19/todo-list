@@ -2,8 +2,8 @@ pipeline{
         agent any
         environment{
                 VERSION = "1.${BUILD_ID}"
-                DATABASE_URI 
-                SECRET_KEY 
+                DATABASE_URI = credentials("DATABASE_URI")
+                SECRET_KEY = credentials("SECRET_KEY")
             }
         stages{
             stage('Test') {
