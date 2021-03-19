@@ -10,6 +10,12 @@ pipeline{
                     steps {
                       sh "bash test.sh"
                     }
+                    post {
+                        always {
+                            junit 'junit.xml'
+                            cobertura coberturaReportFile: 'coverage.xml', failNoReports: false
+                        }
+                    }
                 }
             stage('Deploy') { 
                     steps {
@@ -18,10 +24,5 @@ pipeline{
                     }
                 }
         }
-        post {
-        always {
-            junit 'junit.xml'
-            cobertura coberturaReportFile: 'coverage.xml', failNoReports: false
-        }
-    }
+        
 }
