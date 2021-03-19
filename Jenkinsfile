@@ -13,7 +13,8 @@ pipeline{
                 }
             stage('Deploy') { 
                     steps {
-                      
+                        sh "bash jenkins/deploy_compose.sh"
+                        sh "docker exec todo-app python3 create.py"
                     }
                 }
         }
