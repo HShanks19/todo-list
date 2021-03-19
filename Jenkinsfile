@@ -3,23 +3,23 @@ pipeline{
         stages{
             stage('Install Dependencies'){
                 steps{
-                      python3 -m venv venv
-                      source venv/bin/activate
-                      pip install -r 'requirements.txt'
-                      pip install pytest pytest-cov
-                      export DATABASE_URI
-                      export SECRET_KEY
+                      sh 'python3 -m venv venv'
+                      sh 'source venv/bin/activate'
+                      sh 'pip install -r requirements.txt'
+                      sh 'pip install pytest pytest-cov'
+                      sh 'export DATABASE_URI'
+                      sh 'export SECRET_KEY'
                 }
             }
             stage('Test') {
                     steps {
-                      python3 -m pytest --cov=application --junitxml=junit.xml --cov-report=xml
+                      sh 'python3 -m pytest --cov=application --junitxml=junit.xml --cov-report=xml'
                     }
                 }
             stage('Deploy') { 
                     steps {
-                      python3 create.py
-                      python3 app.py
+                      sh 'python3 create.py'
+                      sh 'python3 app.py'
                     }
                 }
         }
