@@ -1,11 +1,11 @@
 pipeline{
         agent any
-        stages{
-            environment{
+        environment{
                 VERSION = "1.${BUILD_ID}"
                 DATABASE_URI 
                 SECRET_KEY 
             }
+        stages{
             stage('Test') {
                     steps {
                       sh "bash test.sh"
